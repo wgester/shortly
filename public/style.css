@@ -80,6 +80,19 @@ h1 {
   font-weight: 600;
 }
 
+.link .time {
+  float: right;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+
+.link .time .timestamp {
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .link .title {
   font-weight: 600;
 }

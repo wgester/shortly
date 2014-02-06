@@ -2,6 +2,9 @@ window.Shortly = Backbone.View.extend({
 
   template: _.template(' \
       <h1>Shortly</h1> \
+      <input type="text" id="filter" placeholder ="Filter By:"></input> \
+      <button id="filterButton">Filter</button> \
+      <button id="resetButton">Reset</button> \
       <div class="navigation"> \
       <ul> \
         <li><a href="#" class="index">All Links</a></li> \
@@ -13,7 +16,9 @@ window.Shortly = Backbone.View.extend({
 
   events: {
     "click li a.index":  "renderIndexView",
-    "click li a.create": "renderCreateView"
+    "click li a.create": "renderCreateView",
+    "click #filterButton": "filter",
+    "click #resetButton": "renderIndexView"
   },
 
   initialize: function(){
@@ -47,6 +52,20 @@ window.Shortly = Backbone.View.extend({
             .removeClass('selected')
             .filter('.'+className)
             .addClass('selected');
+  },
+
+  filter: function(){
+    var filter = $('#filter').val();
+    var deleteArray = [];
+    for (var i = 0; i < $('.original').length; i++){
+      if (($('.original')[i].innerHTML).indexOf(filter) === -1){
+        deleteArray.unshift(i);
+      } 
+    }
+    for (var i = 0; i < deleteArray.length; i++){
+      $('.link')[deleteArray[i]].remove();
+    }
+    $('#filter').val("");
   }
 
 });
